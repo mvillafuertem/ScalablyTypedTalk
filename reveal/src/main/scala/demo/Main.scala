@@ -10,11 +10,19 @@ import scala.scalajs.js.annotation.JSImport
 import japgolly.scalajs.react.ScalaComponent
 import japgolly.scalajs.react.vdom.html_<^._
 
-object Demo {
+object Main {
   val Talk = ScalaComponent
     .builder[Unit]("Presentation")
     .renderStatic(
-      <.div(^.cls := "reveal", <.div(^.cls := "slides", Intro.Chapter, Motivation.Chapter, Meat.Chapter))
+      <.div(
+        ^.cls := "reveal",
+        <.div(
+          ^.cls := "slides",
+          Meat.Chapter,
+          Intro.Chapter,
+          Motivation.Chapter,
+        )
+      )
     )
     .build
 
@@ -23,6 +31,7 @@ object Demo {
     Includes.HighlightingCss
     Includes.WhiteThemeCss
     Includes.RevealCss
+    Includes.CustomStyling
     Includes.Reveal
     Includes.ZoomJs
 
@@ -38,7 +47,7 @@ object Demo {
         height     = "100%",
         controls   = false,
         progress   = false,
-        history    = false,
+        history    = true,
         center     = true,
         transition = "none",
       )
@@ -68,4 +77,8 @@ object Includes {
   @JSImport("reveal.js/css/reveal.css", JSImport.Namespace)
   @js.native
   object RevealCss extends js.Object
+
+  @JSImport("../../../../src/main/resources/custom.css", JSImport.Namespace)
+  @js.native
+  object CustomStyling extends js.Object
 }

@@ -8,8 +8,9 @@ import org.scalajs.dom.raw.HTMLElement
 object PresentationUtil {
   def chapter(slides: TagMod*) = <.section(slides: _*)
 
-  def chapterSlide(content: TagMod*) =
+  def chapterSlide(title: TagMod, content: TagMod*) =
     <.section(
+      <.h2(title),
       TagMod.fromTraversableOnce(
         Seq(
           VdomAttr("data-background-color") := "#363633",
@@ -35,9 +36,9 @@ object PresentationUtil {
   object code {
     def apply(language: String)(codeStr: String) =
       <.pre(
-        ^.cls := "fragment fade-in",
+        ^.cls := "fragment no-box-shadow",
         <.code(
-          ^.cls := language,
+          ^.cls := s"$language full-height",
           VdomAttr("data-trim") := "",
           VdomAttr("data-noescape") := "",
           codeStr
@@ -46,6 +47,19 @@ object PresentationUtil {
 
     val scala = code("Scala") _
     val ts    = code("Typescript") _
+  }
+
+  object codeFragment {
+    def apply(language: String)(codeStr: String) =
+        <.code(
+          ^.cls := s"$language",
+          VdomAttr("data-trim") := "",
+          VdomAttr("data-noescape") := "",
+          codeStr
+      )
+
+    val scala = codeFragment("Scala") _
+    val ts    = codeFragment("Typescript") _
   }
 
   def note(s: String) = <.aside(^.className := "notes", s)

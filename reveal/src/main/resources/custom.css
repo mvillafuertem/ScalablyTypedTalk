@@ -1,0 +1,8 @@
+.reveal .full-height {
+    height: 100%;
+    max-height: unset;
+}
+.reveal .no-box-shadow {
+    box-shadow: none;
+    margin: 5px;
+}
