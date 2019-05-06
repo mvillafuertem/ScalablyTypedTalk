@@ -5,7 +5,7 @@ import talk.PresentationUtil.{chapter, chapterSlide}
 
 //noinspection TypeAnnotation
 object Intro {
-  val About   = chapterSlide(
+  val About = chapterSlide(
     "Introducing ScalablyTyped",
     <.br,
     <.p("Øyvind Raddum Berg"),

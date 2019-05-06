@@ -5,8 +5,11 @@ import japgolly.scalajs.react.{Children, JsComponent}
 import org.scalablytyped.runtime.TopLevel
 import talk.PresentationUtil._
 import typings.atFortawesomeFontawesomeDashSvgDashCoreLib.atFortawesomeFontawesomeDashSvgDashCoreMod.^.library
-import typings.atFortawesomeFreeDashSolidDashSvgDashIconsLib.{atFortawesomeFreeDashSolidDashSvgDashIconsMod => Icons}
-import typings.atFortawesomeReactDashFontawesomeLib.atFortawesomeReactDashFontawesomeLibComponents.{FontAwesomeIcon, Props => FontAwesomeProps}
+import typings.atFortawesomeFreeDashSolidDashSvgDashIconsLib.atFortawesomeFreeDashSolidDashSvgDashIconsMod.faStroopwafel
+import typings.atFortawesomeReactDashFontawesomeLib.atFortawesomeReactDashFontawesomeLibComponents.{
+  FontAwesomeIcon,
+  Props => FontAwesomeProps
+}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
@@ -14,8 +17,7 @@ import scala.scalajs.js.annotation.JSImport
 //noinspection TypeAnnotation
 object MotivationCommunity {
   val FontAwesome = JsComponent[FontAwesomeProps, Children.None, js.Object](FontAwesomeIcon.asInstanceOf[js.Object])
-
-  library.add(Icons.faStroopwafel)
+  library.add(faStroopwafel)
 
   @JSImport("../../../../src/main/resources/happy_sad_meme.jpg", JSImport.Namespace)
   @js.native
@@ -28,7 +30,7 @@ object MotivationCommunity {
   val ContributorAttrition2 = slide(
     "Phases of contributor attrition",
     list(
-      item(FontAwesome(FontAwesomeProps(Icons.faStroopwafel))),
+      item(FontAwesome(FontAwesomeProps(faStroopwafel))),
       item.fadeIn(<.span("Yey! Scala.js!")),
       item.fadeIn("Soo, how can I use ...?"),
       item.fadeIn("Oh, I'm writing a wrapper"),

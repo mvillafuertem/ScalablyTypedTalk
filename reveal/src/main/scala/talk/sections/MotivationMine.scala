@@ -36,43 +36,51 @@ object MotivationMine {
   val ButSomePositives = slide(
     "But javascript also has solutions!",
     list(
-      item(withExamplesP(
-        "Opens up platforms!",
-        "aws-lambda",
-        "cordova",
-        "electron",
-        "jupyter",
-        "node",
-        "raspi",
-        "react-native"
-      )),
-      item(withExamplesP(
-        "UI component libraries",
-        "antd",
-        "bootstrap",
-        "material-ui",
-        "semantic-ui"
-      )),
+      item(
+        withExamplesP(
+          "Opens up platforms!",
+          "aws-lambda",
+          "cordova",
+          "electron",
+          "jupyter",
+          "node",
+          "raspi",
+          "react-native"
+        )
+      ),
+      item(
+        withExamplesP(
+          "UI component libraries",
+          "antd",
+          "bootstrap",
+          "material-ui",
+          "semantic-ui"
+        )
+      ),
       item("Graphical React components and libraries (thousands)"),
-      item(withExamplesP(
-        "Charting",
-        "chart.js",
-        "d3",
-        "highcharts",
-        "nivo",
-        "nvd3"
-      )),
-      item(withExamplesP(
-        "Integrations",
-        "aws",
-        "azure",
-        "auth0",
-        "braintree",
-        "firebase",
-        "google-*",
-        "stripe",
-        "twilio"
-      )),
+      item(
+        withExamplesP(
+          "Charting",
+          "chart.js",
+          "d3",
+          "highcharts",
+          "nivo",
+          "nvd3"
+        )
+      ),
+      item(
+        withExamplesP(
+          "Integrations",
+          "aws",
+          "azure",
+          "auth0",
+          "braintree",
+          "firebase",
+          "google-*",
+          "stripe",
+          "twilio"
+        )
+      ),
       item("Niche things like browser plugins, excel plugins"),
     )
   )

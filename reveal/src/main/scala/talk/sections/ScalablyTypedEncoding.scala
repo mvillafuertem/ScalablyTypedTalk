@@ -46,7 +46,8 @@ object ScalablyTypedEncoding {
 
   val Encoding = chapterSlide("ScalablyTyped encoding")
 
-  val Features = slide("Converter features",
+  val Features = slide(
+    "Converter features",
     list(
       item("Parser for ~all of Typescript"),
       item("Keeps ~all comments"),
@@ -54,12 +55,17 @@ object ScalablyTypedEncoding {
       item("Full implementation of the module system, which all useful javascript libraries rely on"),
       item("~All types and values are fully resolved, across library boundaries"),
       item("A naming scheme to avoid name collisions"),
-      item("Scala.js must abide by JVM rules, so we handle erasure, overloads, overrides, default parameters, var conflicts, inheritance conflicts, etc."),
+      item(
+        "Scala.js must abide by JVM rules, so we handle erasure, overloads, overrides, default parameters, var conflicts, inheritance conflicts, etc."
+      ),
       item("Better user convenience by converting to @ScalaJSDefined traits"),
-      item("Bridges gap between structural and nominal typing somewhat by a strong bias towards type aliases instead of traits"),
+      item(
+        "Bridges gap between structural and nominal typing somewhat by a strong bias towards type aliases instead of traits"
+      ),
       item(<.span("Answers typeof queries and type lookups (", codeFragment.scala("React.Props['children']"), ")")),
       item("Fills in defaulted type parameters"),
-    ))
+    )
+  )
 
   val Anatomy = slide(
     "Anatomy of a typing",

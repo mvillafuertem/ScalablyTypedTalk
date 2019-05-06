@@ -81,7 +81,7 @@ object PresentationUtil {
   def note(s: String) = <.aside(^.className := "notes", s)
 
   def list(head: TagMod, tail: TagMod*) = <.ul(head +: tail: _*)
-  def link(uri: String) =
+  def link(uri:  String) =
     <.a(^.href := "https://" + uri, uri)
 
   object item {
