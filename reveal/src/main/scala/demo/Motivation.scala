@@ -2,9 +2,38 @@ package demo
 
 import demo.PresentationUtil._
 import japgolly.scalajs.react.vdom.html_<^._
+import org.scalablytyped.runtime.TopLevel
+import typings.atFortawesomeFreeDashSolidDashSvgDashIconsLib.atFortawesomeFreeDashSolidDashSvgDashIconsMod.faStroopwafel
+
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSImport
 
 //noinspection TypeAnnotation
 object Motivation {
+  @JSImport("../../../../src/main/resources/happy_sad_meme.jpg", JSImport.Namespace)
+  @js.native
+  object MemeHappySadImg extends TopLevel[String]
+
+  @JSImport("../../../../src/main/resources/meme_wrappers.jpg.jpg", JSImport.Namespace)
+  @js.native
+  object MemeWrappersImg extends TopLevel[String]
+
+  val ContributorAttrition2 = slide("Phases of contributor attrition",
+    list(
+      item(FontAwesome(FontAwesomeProps(faStroopwafel))),
+      item.fadeIn(<.span("Yey! Scala.js!")),
+      item.fadeIn("Soo, how can I use ...?"),
+      item.fadeIn("Oh, I'm writing a wrapper"),
+      item.fadeIn("Look, "),
+    )
+  )
+
+  val ContributorAttrition = slide("Phases of contributor attrition",
+    <.img(^.src := (MemeHappySadImg: String))
+  )
+
+  val Frontpage = chapterSlide("Motivation")
+
   val Scalajs = slide(
     "Scala.js",
     list(
@@ -37,12 +66,12 @@ object Motivation {
   val ButSomePositives = slide(
     "But javascript also has solutions!",
     list(
-      item("Opens up platforms! (aws-lambda, electron, cordova, jupyter, node, raspi, react-native)"),
+      item("Opens up platforms! (aws-lambda, cordova, electron, jupyter, node, raspi, react-native)"),
       item("UI component libraries (antd, bootstrap, material-ui, semantic-ui, etc)"),
       item("Graphical React components and libraries (thousands)"),
       item("Charting (chart.js, d3, highcharts, nivo, nvd3)"),
       item(
-        "Integrations (aws, azure, auth0, braintree, firebase, most google services, stripe, twilio etc)"
+        "Integrations (aws, azure, auth0, braintree, firebase, most google services, stripe, twilio)"
       ),
       item("Niche things like browser plugins, excel plugins"),
     )
@@ -81,6 +110,9 @@ object Motivation {
   )
 
   val Chapter = chapter(
+    Frontpage,
+    ContributorAttrition,
+    ContributorAttrition2,
     Scalajs,
     ScalajsBut,
     TerribleTechnologies,

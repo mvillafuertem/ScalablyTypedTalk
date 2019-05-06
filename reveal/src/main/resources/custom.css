@@ -6,3 +6,7 @@
     box-shadow: none;
     margin: 5px;
 }
+
+.no-title-case .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+    text-transform: unset !important;
+}

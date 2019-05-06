@@ -1,11 +1,22 @@
 package demo
 
-import japgolly.scalajs.react.vdom.TagOf
 import japgolly.scalajs.react.vdom.html_<^._
+import japgolly.scalajs.react.vdom.{TagMod, TagOf}
+import japgolly.scalajs.react.{Children, JsComponent}
 import org.scalajs.dom.raw.HTMLElement
+import typings.atFortawesomeFontawesomeDashSvgDashCoreLib.atFortawesomeFontawesomeDashSvgDashCoreMod.^.library
+import typings.atFortawesomeFreeDashSolidDashSvgDashIconsLib.atFortawesomeFreeDashSolidDashSvgDashIconsMod.faStroopwafel
+import typings.atFortawesomeReactDashFontawesomeLib.atFortawesomeReactDashFontawesomeLibComponents.FontAwesomeIcon
+import typings.atFortawesomeReactDashFontawesomeLib.atFortawesomeReactDashFontawesomeMod.Props
+
+import scala.scalajs.js
 
 //noinspection TypeAnnotation
 object PresentationUtil {
+  val FontAwesome      = JsComponent[Props, Children.None, js.Object](FontAwesomeIcon.asInstanceOf[js.Object])
+  def FontAwesomeProps = Props
+
+  library.add(faStroopwafel)
   def chapter(slides: TagMod*) = <.section(slides: _*)
 
   def chapterSlide(title: TagMod, content: TagMod*) =
@@ -23,7 +34,7 @@ object PresentationUtil {
     def apply(headerStr: String, content: TagOf[HTMLElement]*) =
       <.section(
         <.div(
-          ^.cls := "slide-header",
+          ^.cls := "slide-header no-title-case",
           <.h3(headerStr)
         ),
         TagMod.fromTraversableOnce(content)
@@ -51,11 +62,11 @@ object PresentationUtil {
 
   object codeFragment {
     def apply(language: String)(codeStr: String) =
-        <.code(
-          ^.cls := s"$language",
-          VdomAttr("data-trim") := "",
-          VdomAttr("data-noescape") := "",
-          codeStr
+      <.code(
+        ^.cls := s"$language",
+        VdomAttr("data-trim") := "",
+        VdomAttr("data-noescape") := "",
+        codeStr
       )
 
     val scala = codeFragment("Scala") _
@@ -67,9 +78,9 @@ object PresentationUtil {
   def list(head: TagOf[HTMLElement], tail: TagOf[HTMLElement]*) = <.ul(head +: tail: _*)
 
   object item {
-    def apply(content:  TagOf[HTMLElement]) = <.li(content)
-    def apply(content:  String)             = <.li(<.p(content))
-    def fadeIn(content: TagOf[HTMLElement]) = <.li(^.cls := "fragment fade-in", content)
-    def fadeIn(content: String)             = <.li(^.cls := "fragment fade-in", <.p(content))
+    def apply(content:  TagMod) = <.li(content)
+    def apply(content:  String) = <.li(<.p(content))
+    def fadeIn(content: TagMod) = <.li(^.cls := "fragment fade-in", content)
+    def fadeIn(content: String) = <.li(^.cls := "fragment fade-in", <.p(content))
   }
 }

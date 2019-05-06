@@ -17,8 +17,6 @@ object Meat {
   //- nice sounding word, diminutive of `type`
   //- difference typing/facade
   //
-  //### Anatomy of a ScalablyTyped library
-  //
   //## Compiler
   //
   //walk through:
@@ -53,8 +51,7 @@ object Meat {
   val Interop = slide(
     "Scala.js interop",
     <.h5("""parallel type hierarchy with "javascript semantics""""),
-    code.scala(
-      """
+    code.scala("""
 js.Any
  +- js.Object
  |   +- js.Date
@@ -77,11 +74,14 @@ js.Any
  +- js.Dictionary[A]
  +- js.Symbol
       """),
-//    list(
-//      item(<.span("types extending from ", codeFragment.scala("Any"), """ has "scala semantics"""")),
-//      item(<.span("types extending from ", codeFragment.scala("js.Any"), """ has "javascript semantics"""")),
-//    ),
   )
+
+  def code2(ts: String, scala: String) =
+    <.div(
+      ^.style := js.Dynamic.literal(display = "flex"),
+      code.ts(ts),
+      code.scala(scala)
+    )
 
   val Anatomy = slide(
     "Anatomy of a typing",
@@ -90,9 +90,8 @@ js.Any
       item("avoiding name collisions"),
       item("top level members in `^`"),
     ),
-    <.div(
-      ^.style := js.Dynamic.literal(display = "flex"),
-      code.ts("""
+    code2(
+      """
 // library foo
 
 declare namespace foo {
@@ -104,8 +103,8 @@ declare function foo(foo: number): number;
 declare module "foo" {
   export = foo;
 }
-"""),
-      code.scala("""
+""",
+      """
 package typings
 package fooLib
 
@@ -127,9 +126,58 @@ object fooMod extends js.Object {
   val foo: scala.String = js.native
   def apply(foo: scala.Double): scala.Double = js.native
 }
-""")
+"""
     ),
   )
 
-  val Chapter = chapter(Encoding, Interop, Anatomy)
+  val Methods = slide(
+    "Methods",
+    list(
+      item("Huge challenge for conversion"),
+      item("Typescript is basically a big DSL for perfectly describing javascript interfaces"),
+      item("Scala.js bound by JVM constraints, like erasure"),
+
+      item.fadeIn("")
+    )
+  )
+
+  val LiteralTypes = slide(
+    "literal types",
+    code2(
+      """
+export class Readable
+  extends Stream
+  implements NodeJS.ReadableStream {
+    on(event: "close", listener: () => void): this;
+}""",
+      """
+@JSImport("stream", "Readable")
+@js.native
+class Readable ()
+  extends Stream
+     with nodeLib.NodeJSNs.ReadableStream {
+  @JSName("on")
+  def on_close(
+    event: nodeLib.nodeLibStrings.close,
+    listener: js.Function0[scala.Unit]
+  ): this.type = js.native
+}
+
+object nodeLibStrings {
+  @js.native
+  sealed trait close extends js.Object
+
+  @scala.inline
+  def close: close = "close".asInstanceOf[close]
+}"""
+    )
+  )
+
+  val UnionTypes = slide("union types", code.scala("""
+
+      """))
+
+  val AnonymousTypes = slide("anonymous types")
+
+  val Chapter = chapter(Encoding, Interop, Anatomy, LiteralTypes, UnionTypes, AnonymousTypes)
 }

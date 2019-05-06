@@ -6,9 +6,9 @@ import typings.revealLib.{RevealOptions, RevealStatic}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
-
 import japgolly.scalajs.react.ScalaComponent
 import japgolly.scalajs.react.vdom.html_<^._
+import org.scalablytyped.runtime.TopLevel
 
 object Main {
   val Talk = ScalaComponent
@@ -18,9 +18,9 @@ object Main {
         ^.cls := "reveal",
         <.div(
           ^.cls := "slides",
-          Meat.Chapter,
           Intro.Chapter,
           Motivation.Chapter,
+          Meat.Chapter,
         )
       )
     )
@@ -44,12 +44,21 @@ object Main {
     Includes.Reveal.initialize(
       RevealOptions(
         width      = "80%",
-        height     = "100%",
+        height     = "90%",
         controls   = false,
         progress   = false,
         history    = true,
         center     = true,
         transition = "none",
+        // Parallax background image
+        parallaxBackgroundImage = Includes.Background,
+        // CSS syntax, e.g.  - currently only pixels are supported (don't use % or auto)
+        parallaxBackgroundSize = "4608px 3072px",
+        // Number of pixels to move the parallax background per slide
+        // - Calculated automatically unless specified
+        // - Set to 0 to disable movement along an axis
+        parallaxBackgroundHorizontal = 200,
+        parallaxBackgroundVertical   = 100,
       )
     )
   }
@@ -66,7 +75,8 @@ object Includes {
   @js.native
   object ZoomJs extends RevealStatic
 
-  @JSImport("reveal.js/lib/css/zenburn.css", JSImport.Namespace)
+//  @JSImport("reveal.js/lib/css/zenburn.css", JSImport.Namespace)
+  @JSImport("highlight.js/styles/tomorrow.css", JSImport.Namespace)
   @js.native
   object HighlightingCss extends js.Object
 
@@ -81,4 +91,8 @@ object Includes {
   @JSImport("../../../../src/main/resources/custom.css", JSImport.Namespace)
   @js.native
   object CustomStyling extends js.Object
+
+  @JSImport("../../../../src/main/resources/background.jpg", JSImport.Namespace)
+  @js.native
+  object Background extends TopLevel[String]
 }

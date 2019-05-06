@@ -5,10 +5,12 @@ import japgolly.scalajs.react.vdom.html_<^._
 
 //noinspection TypeAnnotation
 object Intro {
-  val About = chapterSlide("Introducing ScalablyTyped",
+  val About   = chapterSlide(
+    "Introducing ScalablyTyped",
     <.br,
     <.p("Øyvind Raddum Berg"),
     <.p("oyvind.berg@arktekk.no"),
+    <.p("flatMap(Oslo) 2019"),
   )
   val Chapter = chapter(Intro.About)
 }

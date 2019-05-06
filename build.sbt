@@ -21,6 +21,10 @@ lazy val reveal = project
     webpackDevServerPort := 8010,
     libraryDependencies ++= Seq(
       "com.github.japgolly.scalajs-react" %%% "core" % "1.3.1",
+      ScalablyTyped.F.`fortawesome__fontawesome-common-types`,
+      ScalablyTyped.F.`fortawesome__fontawesome-svg-core`,
+      ScalablyTyped.F.`fortawesome__free-solid-svg-icons`,
+      ScalablyTyped.F.`fortawesome__react-fontawesome`,
       ScalablyTyped.H.highlight_dot_js,
       ScalablyTyped.R.`react-japgolly-facade`,
       ScalablyTyped.R.`reveal`,
@@ -30,6 +34,10 @@ lazy val reveal = project
       "reveal.js" -> "3.7.0",
       "react-dom" -> "16.8",
       "react" -> "16.8",
+      "@fortawesome/fontawesome-common-types" -> "0.2.17",
+      "@fortawesome/fontawesome-svg-core" -> "1.2.17",
+      "@fortawesome/free-solid-svg-icons" -> "5.8.1",
+      "@fortawesome/react-fontawesome" -> "0.1.4",
     ),
   )
 
