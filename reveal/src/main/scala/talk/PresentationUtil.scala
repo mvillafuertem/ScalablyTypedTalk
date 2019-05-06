@@ -17,7 +17,7 @@ object PresentationUtil {
       TagMod.fromTraversableOnce(
         Seq(
           VdomAttr("data-background-color") := "#363633",
-          VdomAttr("data-background-size") := "30%"
+          VdomAttr("data-background-size") := "30%",
         ) ++ content
       )
     )
@@ -26,7 +26,7 @@ object PresentationUtil {
     def apply(headerStr: String, content: TagOf[HTMLElement]*) =
       <.section(
         <.div(
-          ^.cls := "slide-header no-title-case",
+          ^.cls := "slide-header",
           <.h3(headerStr)
         ),
         TagMod.fromTraversableOnce(content)
@@ -46,9 +46,9 @@ object PresentationUtil {
   object code {
     def apply(language: String)(codeStr: String) =
       <.pre(
-        ^.cls := "fragment no-box-shadow",
+        ^.cls := "fragment",
         <.code(
-          ^.cls := s"$language full-height almost-opaque",
+          ^.cls := s"$language",
           VdomAttr("data-trim") := "",
           VdomAttr("data-noescape") := "",
           codeStr
@@ -72,9 +72,15 @@ object PresentationUtil {
     val ts    = codeFragment("Typescript") _
   }
 
+  def withExamples(str: String, xs: String*): TagMod =
+    <.span(str, " ", TagMod.intercalate(xs.map(codeFragment.scala), ", "))
+
+  def withExamplesP(str: String, xs: String*): TagMod =
+    <.span(str, " (", TagMod.intercalate(xs.map(codeFragment.scala), ", "), ")")
+
   def note(s: String) = <.aside(^.className := "notes", s)
 
-  def list(head: TagOf[HTMLElement], tail: TagOf[HTMLElement]*) = <.ul(head +: tail: _*)
+  def list(head: TagMod, tail: TagMod*) = <.ul(head +: tail: _*)
   def link(uri: String) =
     <.a(^.href := "https://" + uri, uri)
 

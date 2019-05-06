@@ -19,9 +19,9 @@ object Main {
         <.div(
           ^.cls := "slides",
           sections.Intro.Chapter,
-          sections.About.Chapter,
           sections.MotivationCommunity.Chapter,
           sections.MotivationMine.Chapter,
+          sections.About.Chapter,
           sections.ScalaJsInterop.Chapter,
           sections.ScalablyTypedEncoding.Chapter,
         )
@@ -31,10 +31,9 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     // Touch to load
-    Includes.HighlightingCss
-    Includes.WhiteThemeCss
+    Includes.HighlightingTheme
+    Includes.RevealTheme
     Includes.RevealCss
-    Includes.CustomStyling
     Includes.Reveal
     Includes.ZoomJs
 
@@ -76,22 +75,17 @@ object Main {
     @js.native
     object ZoomJs extends js.Object
 
-    //  @JSImport("reveal.js/lib/css/zenburn.css", JSImport.Namespace)
-    @JSImport("highlight.js/styles/tomorrow.css", JSImport.Namespace)
-    @js.native
-    object HighlightingCss extends js.Object
-
-    @JSImport("reveal.js/css/theme/white.css", JSImport.Namespace)
-    @js.native
-    object WhiteThemeCss extends js.Object
-
     @JSImport("reveal.js/css/reveal.css", JSImport.Namespace)
     @js.native
     object RevealCss extends js.Object
 
-    @JSImport("../../../../src/main/resources/custom.css", JSImport.Namespace)
+    @JSImport("highlight.js/styles/darcula.css", JSImport.Namespace)
     @js.native
-    object CustomStyling extends js.Object
+    object HighlightingTheme extends js.Object
+
+    @JSImport("../../../../src/main/resources/revealtheme.css", JSImport.Namespace)
+    @js.native
+    object RevealTheme extends js.Object
 
     @JSImport("../../../../src/main/resources/background.jpg", JSImport.Namespace)
     @js.native

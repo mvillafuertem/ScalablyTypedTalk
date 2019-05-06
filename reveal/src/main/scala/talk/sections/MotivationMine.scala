@@ -8,10 +8,8 @@ object MotivationMine {
   val Scalajs = slide(
     "Scala.js",
     list(
-      item("This talk won't be about the virtues of Scala.js"),
-      item("Awesome, principled language and ecosystem, strong types, "),
-      item.fadeIn("but lacks hype, uptake, and amazing ui component libraries"),
-      item.fadeIn("But..."),
+      item("Awesome, principled language and ecosystem, strong types, etc"),
+      item("However, This talk won't be about the virtues of Scala.js"),
     ),
   )
 
@@ -19,11 +17,11 @@ object MotivationMine {
     "Scala.js - The flip side",
     list(
       // History repeats itself?
-      item("An awesome programming language"),
-      item.fadeIn("but lacks hype, uptake, and amazing ui component libraries"),
+      item.fadeIn("Lacks breadth"),
       item.fadeIn("History repeats itself?"),
     ),
   )
+
   val TerribleTechnologies = slide(
     "Motivation",
     list(
@@ -34,26 +32,58 @@ object MotivationMine {
       ),
     )
   )
+
   val ButSomePositives = slide(
     "But javascript also has solutions!",
     list(
-      item("Opens up platforms! (aws-lambda, cordova, electron, jupyter, node, raspi, react-native)"),
-      item("UI component libraries (antd, bootstrap, material-ui, semantic-ui, etc)"),
+      item(withExamplesP(
+        "Opens up platforms!",
+        "aws-lambda",
+        "cordova",
+        "electron",
+        "jupyter",
+        "node",
+        "raspi",
+        "react-native"
+      )),
+      item(withExamplesP(
+        "UI component libraries",
+        "antd",
+        "bootstrap",
+        "material-ui",
+        "semantic-ui"
+      )),
       item("Graphical React components and libraries (thousands)"),
-      item("Charting (chart.js, d3, highcharts, nivo, nvd3)"),
-      item(
-        "Integrations (aws, azure, auth0, braintree, firebase, most google services, stripe, twilio)"
-      ),
+      item(withExamplesP(
+        "Charting",
+        "chart.js",
+        "d3",
+        "highcharts",
+        "nivo",
+        "nvd3"
+      )),
+      item(withExamplesP(
+        "Integrations",
+        "aws",
+        "azure",
+        "auth0",
+        "braintree",
+        "firebase",
+        "google-*",
+        "stripe",
+        "twilio"
+      )),
       item("Niche things like browser plugins, excel plugins"),
     )
   )
   val WeActuallyWantThis = slide(
-    "Hmm, that sounds useful! Scala doesn't serve all of those niches well",
+    "Hmm, that sounds useful!",
+    <.p("Scala doesn't really serve all those niches well."),
     <.p("But how? "),
     list(
       item.fadeIn("We already talked about the burning platform"),
       item.fadeIn("Turns out there is a helicopter off it"),
-      item.fadeIn("Let's talk about Typescript"),
+      item.fadeIn("Let's talk about Typescript!"),
     )
   )
   val TypescriptOnASlide = slide(
@@ -61,7 +91,7 @@ object MotivationMine {
     list(
       item("Gradual, static typing for Javascript"),
       item("Taking over the world, fast!"),
-      item("Surprisingly rich type system to richly describe how Javascript libraries work"),
+      item("Surprisingly rich type system to describe how Javascript craziness"),
 //        Item.stable("loose relationship between types and values, but has a very reasonable language subset"),
 //        Item.stable("the language *is* the integration to javascript"),
 //        Item.stable("very specialized DSL for javascript"),
