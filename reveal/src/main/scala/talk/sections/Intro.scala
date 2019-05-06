@@ -1,7 +1,7 @@
-package demo
+package talk.sections
 
-import demo.PresentationUtil.{chapter, chapterSlide}
 import japgolly.scalajs.react.vdom.html_<^._
+import talk.PresentationUtil.{chapter, chapterSlide}
 
 //noinspection TypeAnnotation
 object Intro {

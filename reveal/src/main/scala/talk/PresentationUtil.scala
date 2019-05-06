@@ -1,22 +1,14 @@
-package demo
+package talk
 
 import japgolly.scalajs.react.vdom.html_<^._
 import japgolly.scalajs.react.vdom.{TagMod, TagOf}
-import japgolly.scalajs.react.{Children, JsComponent}
 import org.scalajs.dom.raw.HTMLElement
-import typings.atFortawesomeFontawesomeDashSvgDashCoreLib.atFortawesomeFontawesomeDashSvgDashCoreMod.^.library
-import typings.atFortawesomeFreeDashSolidDashSvgDashIconsLib.atFortawesomeFreeDashSolidDashSvgDashIconsMod.faStroopwafel
-import typings.atFortawesomeReactDashFontawesomeLib.atFortawesomeReactDashFontawesomeLibComponents.FontAwesomeIcon
-import typings.atFortawesomeReactDashFontawesomeLib.atFortawesomeReactDashFontawesomeMod.Props
 
 import scala.scalajs.js
 
 //noinspection TypeAnnotation
 object PresentationUtil {
-  val FontAwesome      = JsComponent[Props, Children.None, js.Object](FontAwesomeIcon.asInstanceOf[js.Object])
-  def FontAwesomeProps = Props
 
-  library.add(faStroopwafel)
   def chapter(slides: TagMod*) = <.section(slides: _*)
 
   def chapterSlide(title: TagMod, content: TagMod*) =
@@ -44,12 +36,19 @@ object PresentationUtil {
       <.section(content: _*)
   }
 
+  def codeSplit(ts: String, scala: String) =
+    <.div(
+      ^.style := js.Dynamic.literal(display = "flex"),
+      code.ts(ts),
+      code.scala(scala)
+    )
+
   object code {
     def apply(language: String)(codeStr: String) =
       <.pre(
         ^.cls := "fragment no-box-shadow",
         <.code(
-          ^.cls := s"$language full-height",
+          ^.cls := s"$language full-height almost-opaque",
           VdomAttr("data-trim") := "",
           VdomAttr("data-noescape") := "",
           codeStr
@@ -76,6 +75,8 @@ object PresentationUtil {
   def note(s: String) = <.aside(^.className := "notes", s)
 
   def list(head: TagOf[HTMLElement], tail: TagOf[HTMLElement]*) = <.ul(head +: tail: _*)
+  def link(uri: String) =
+    <.a(^.href := "https://" + uri, uri)
 
   object item {
     def apply(content:  TagMod) = <.li(content)

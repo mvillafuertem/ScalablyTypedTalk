@@ -1,39 +1,10 @@
-package demo
+package talk.sections
 
-import demo.PresentationUtil._
 import japgolly.scalajs.react.vdom.html_<^._
-import org.scalablytyped.runtime.TopLevel
-import typings.atFortawesomeFreeDashSolidDashSvgDashIconsLib.atFortawesomeFreeDashSolidDashSvgDashIconsMod.faStroopwafel
-
-import scala.scalajs.js
-import scala.scalajs.js.annotation.JSImport
+import talk.PresentationUtil._
 
 //noinspection TypeAnnotation
-object Motivation {
-  @JSImport("../../../../src/main/resources/happy_sad_meme.jpg", JSImport.Namespace)
-  @js.native
-  object MemeHappySadImg extends TopLevel[String]
-
-  @JSImport("../../../../src/main/resources/meme_wrappers.jpg.jpg", JSImport.Namespace)
-  @js.native
-  object MemeWrappersImg extends TopLevel[String]
-
-  val ContributorAttrition2 = slide("Phases of contributor attrition",
-    list(
-      item(FontAwesome(FontAwesomeProps(faStroopwafel))),
-      item.fadeIn(<.span("Yey! Scala.js!")),
-      item.fadeIn("Soo, how can I use ...?"),
-      item.fadeIn("Oh, I'm writing a wrapper"),
-      item.fadeIn("Look, "),
-    )
-  )
-
-  val ContributorAttrition = slide("Phases of contributor attrition",
-    <.img(^.src := (MemeHappySadImg: String))
-  )
-
-  val Frontpage = chapterSlide("Motivation")
-
+object MotivationMine {
   val Scalajs = slide(
     "Scala.js",
     list(
@@ -110,9 +81,7 @@ object Motivation {
   )
 
   val Chapter = chapter(
-    Frontpage,
-    ContributorAttrition,
-    ContributorAttrition2,
+    chapterSlide("Motivation"),
     Scalajs,
     ScalajsBut,
     TerribleTechnologies,

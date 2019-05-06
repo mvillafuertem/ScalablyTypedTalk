@@ -1,4 +1,4 @@
-package demo
+package talk
 
 import org.scalajs.dom
 import typings.highlightDotJsLib.highlightDotJsMod
@@ -18,9 +18,12 @@ object Main {
         ^.cls := "reveal",
         <.div(
           ^.cls := "slides",
-          Intro.Chapter,
-          Motivation.Chapter,
-          Meat.Chapter,
+          sections.Intro.Chapter,
+          sections.About.Chapter,
+          sections.MotivationCommunity.Chapter,
+          sections.MotivationMine.Chapter,
+          sections.ScalaJsInterop.Chapter,
+          sections.ScalablyTypedEncoding.Chapter,
         )
       )
     )
@@ -57,42 +60,41 @@ object Main {
         // Number of pixels to move the parallax background per slide
         // - Calculated automatically unless specified
         // - Set to 0 to disable movement along an axis
-        parallaxBackgroundHorizontal = 200,
-        parallaxBackgroundVertical   = 100,
+//        parallaxBackgroundHorizontal = 200,
+//        parallaxBackgroundVertical   = 100,
       )
     )
   }
-}
 
-object Includes {
+  object Includes {
+    /* customize import and use as module, even though the typings originally were global */
+    @JSImport("reveal.js/js/reveal.js", JSImport.Namespace)
+    @js.native
+    object Reveal extends RevealStatic
 
-  /* customize import and use as module, even though the typings originally were global */
-  @JSImport("reveal.js/js/reveal.js", JSImport.Namespace)
-  @js.native
-  object Reveal extends RevealStatic
+    @JSImport("reveal.js/plugin/zoom-js/zoom.js", JSImport.Namespace)
+    @js.native
+    object ZoomJs extends js.Object
 
-  @JSImport("reveal.js/plugin/zoom-js/zoom.js", JSImport.Namespace)
-  @js.native
-  object ZoomJs extends RevealStatic
+    //  @JSImport("reveal.js/lib/css/zenburn.css", JSImport.Namespace)
+    @JSImport("highlight.js/styles/tomorrow.css", JSImport.Namespace)
+    @js.native
+    object HighlightingCss extends js.Object
 
-//  @JSImport("reveal.js/lib/css/zenburn.css", JSImport.Namespace)
-  @JSImport("highlight.js/styles/tomorrow.css", JSImport.Namespace)
-  @js.native
-  object HighlightingCss extends js.Object
+    @JSImport("reveal.js/css/theme/white.css", JSImport.Namespace)
+    @js.native
+    object WhiteThemeCss extends js.Object
 
-  @JSImport("reveal.js/css/theme/white.css", JSImport.Namespace)
-  @js.native
-  object WhiteThemeCss extends js.Object
+    @JSImport("reveal.js/css/reveal.css", JSImport.Namespace)
+    @js.native
+    object RevealCss extends js.Object
 
-  @JSImport("reveal.js/css/reveal.css", JSImport.Namespace)
-  @js.native
-  object RevealCss extends js.Object
+    @JSImport("../../../../src/main/resources/custom.css", JSImport.Namespace)
+    @js.native
+    object CustomStyling extends js.Object
 
-  @JSImport("../../../../src/main/resources/custom.css", JSImport.Namespace)
-  @js.native
-  object CustomStyling extends js.Object
-
-  @JSImport("../../../../src/main/resources/background.jpg", JSImport.Namespace)
-  @js.native
-  object Background extends TopLevel[String]
+    @JSImport("../../../../src/main/resources/background.jpg", JSImport.Namespace)
+    @js.native
+    object Background extends TopLevel[String]
+  }
 }

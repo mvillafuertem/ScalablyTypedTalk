@@ -1,12 +1,10 @@
-package demo
+package talk.sections
 
-import demo.PresentationUtil._
 import japgolly.scalajs.react.vdom.html_<^._
-
-import scala.scalajs.js
+import talk.PresentationUtil._
 
 //noinspection TypeAnnotation
-object Meat {
+object ScalablyTypedEncoding {
   // ## Accidentally writing a compiler
   // - show typescript code from 2017 and today
   // - was just going to upgrade already almost working code
@@ -46,42 +44,22 @@ object Meat {
   //
   //Matryoshka doll analogy. There's another hill after reaching each new top. There's progress but you never know when you'll be done until you're done.
 
-  val Encoding = chapterSlide("Encoding")
+  val Encoding = chapterSlide("ScalablyTyped encoding")
 
-  val Interop = slide(
-    "Scala.js interop",
-    <.h5("""parallel type hierarchy with "javascript semantics""""),
-    code.scala("""
-js.Any
- +- js.Object
- |   +- js.Date
- |   +- js.RegExp
- |   +- js.Array[A]
- |   +- js.Function
- |   |   +- js.Function0[+R]
- |   |   +- js.Function1[-T1, +R]
- |   |   +- ...
- |   |   +- js.Function22[-T1, ..., -T22, +R]
- |   |   +- js.ThisFunction
- |   |       +- js.ThisFunction0[-T0, +R]
- |   |       +- js.ThisFunction1[-T0, -T1, +R]
- |   |       +- ...
- |   |       +- js.ThisFunction21[-T0, ..., -T21, +R]
- |   +- js.Iterable[+A]
- |   +- js.Iterator[+A]
- |   +- js.Promise[+A]
- |   +- js.Thenable[+A]
- +- js.Dictionary[A]
- +- js.Symbol
-      """),
-  )
-
-  def code2(ts: String, scala: String) =
-    <.div(
-      ^.style := js.Dynamic.literal(display = "flex"),
-      code.ts(ts),
-      code.scala(scala)
-    )
+  val Features = slide("Converter features",
+    list(
+      item("Parser for ~all of Typescript"),
+      item("Keeps ~all comments"),
+      item("Full handling of dependencies between libraries, including those outside of `DefinitelyTyped`"),
+      item("Full implementation of the module system, which all useful javascript libraries rely on"),
+      item("~All types and values are fully resolved, across library boundaries"),
+      item("A naming scheme to avoid name collisions"),
+      item("Scala.js must abide by JVM rules, so we handle erasure, overloads, overrides, default parameters, var conflicts, inheritance conflicts, etc."),
+      item("Better user convenience by converting to @ScalaJSDefined traits"),
+      item("Bridges gap between structural and nominal typing somewhat by a strong bias towards type aliases instead of traits"),
+      item(<.span("Answers typeof queries and type lookups (", codeFragment.scala("React.Props['children']"), ")")),
+      item("Fills in defaulted type parameters"),
+    ))
 
   val Anatomy = slide(
     "Anatomy of a typing",
@@ -90,7 +68,7 @@ js.Any
       item("avoiding name collisions"),
       item("top level members in `^`"),
     ),
-    code2(
+    codeSplit(
       """
 // library foo
 
@@ -110,7 +88,7 @@ package fooLib
 
 @JSGlobal("foo")
 @js.native
-object fooNs extends js.Object {
+object fooNs extends js.Object { // or package fooNs
   val foo: scala.String = js.native
 }
 
@@ -136,14 +114,13 @@ object fooMod extends js.Object {
       item("Huge challenge for conversion"),
       item("Typescript is basically a big DSL for perfectly describing javascript interfaces"),
       item("Scala.js bound by JVM constraints, like erasure"),
-
       item.fadeIn("")
     )
   )
 
   val LiteralTypes = slide(
     "literal types",
-    code2(
+    codeSplit(
       """
 export class Readable
   extends Stream
@@ -179,5 +156,12 @@ object nodeLibStrings {
 
   val AnonymousTypes = slide("anonymous types")
 
-  val Chapter = chapter(Encoding, Interop, Anatomy, LiteralTypes, UnionTypes, AnonymousTypes)
+  val Chapter =
+    chapter(
+      Encoding,
+      Anatomy,
+      LiteralTypes,
+      UnionTypes,
+      AnonymousTypes
+    )
 }
