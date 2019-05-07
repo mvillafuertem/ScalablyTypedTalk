@@ -6,10 +6,17 @@ import talk.PresentationUtil._
 //noinspection TypeAnnotation
 object About {
 
-  val Initial = chapterSlide("About")
+  val Initial = chapterSlide("Enter ScalablyTyped")
+
+  val ScalablyTyped = slide(
+    "What?",
+    list(
+      item("Typescript type definitions automatically translated to Scala.js"),
+    )
+  )
 
   val Numbers = slide(
-    "Key facts",
+    "Numbers",
     list(
       item("Almost 7000 typings on GitHub and published to Bintray"),
       item("Almost 7000000 lines of Scala source code"),
@@ -22,7 +29,7 @@ object About {
   val Facades = slide(
     "Facades",
     list(
-      item("Many typings come out sort of correct, but hard to use."),
+      item(<.span("Many typings come out sort of correct", <.em("ish"), ", but hard to use.")),
       item(
         "The typings are 100% generated, Facades are hand written sugar on top, typically some implicits and some casts"
       ),
@@ -55,5 +62,5 @@ object About {
     )
   )
 
-  val Chapter = chapter(Initial, Numbers, Facades, Demos)
+  val Chapter = chapter(Initial, ScalablyTyped, Numbers, Facades, Demos)
 }

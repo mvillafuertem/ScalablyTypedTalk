@@ -19,11 +19,11 @@ object Main {
         <.div(
           ^.cls := "slides",
           sections.Intro.Chapter,
-          sections.MotivationCommunity.Chapter,
-          sections.MotivationMine.Chapter,
+//          sections.MotivationCommunity.Chapter,
+          sections.Motivation.Chapter,
           sections.About.Chapter,
           sections.ScalaJsInterop.Chapter,
-          sections.ScalablyTypedEncoding.Chapter,
+          sections.Encoding.Chapter,
         )
       )
     )

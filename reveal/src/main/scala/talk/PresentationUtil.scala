@@ -36,9 +36,9 @@ object PresentationUtil {
       <.section(content: _*)
   }
 
-  def codeSplit(ts: String, scala: String) =
+  def codeSplit(ts: String, scala: String, direction: String = "row") =
     <.div(
-      ^.style := js.Dynamic.literal(display = "flex"),
+      ^.style := js.Dynamic.literal(display = "flex", flexDirection = direction),
       code.ts(ts),
       code.scala(scala)
     )
@@ -73,16 +73,16 @@ object PresentationUtil {
   }
 
   def withExamples(str: String, xs: String*): TagMod =
-    <.span(str, " ", TagMod.intercalate(xs.map(codeFragment.scala), ", "))
+    <.span(str, " ", TagMod.intercalate(xs.map(x => <.span(^.cls := "mono", x)), ", "))
 
   def withExamplesP(str: String, xs: String*): TagMod =
-    <.span(str, " (", TagMod.intercalate(xs.map(codeFragment.scala), ", "), ")")
+    <.span(str, " ( ", TagMod.intercalate(xs.map(x => <.span(^.cls := "mono", x)), ", "), " )")
 
   def note(s: String) = <.aside(^.className := "notes", s)
 
   def list(head: TagMod, tail: TagMod*) = <.ul(head +: tail: _*)
-  def link(uri:  String) =
-    <.a(^.href := "https://" + uri, uri)
+
+  def link(uri: String) = <.a(^.href := "https://" + uri, uri)
 
   object item {
     def apply(content:  TagMod) = <.li(content)

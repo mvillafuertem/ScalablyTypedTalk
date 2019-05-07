@@ -17,6 +17,12 @@ body {
     background-color: #fff;
 }
 
+.mono {
+    font-family: monospace;
+    text-transform: none;
+    font-size: xx-small;
+    color: darkslategray;
+}
 .reveal {
     font-family: "Dosis", Helvetica, sans-serif;
     font-size: 42px;

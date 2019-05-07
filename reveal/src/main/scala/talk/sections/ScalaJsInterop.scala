@@ -12,7 +12,7 @@ object ScalaJsInterop {
   )
 
   val TypeHierarchy = slide(
-    """parallel type hierarchy with "javascript semantics"""",
+    """Parallel type hierarchy with "javascript semantics"""",
     code.scala("""
 js.Any
  +- js.Object
@@ -44,7 +44,6 @@ js.Any
   val Annotations = slide(
     "Descriptions driven by annotations",
     list(
-      <.br,
       <.h5("""Describing what is wrapped"""),
       described("@JSImport", " used for describing a Javascript module"),
       described("@JSGlobal", " used for describing Javascript values in the global scope"),
@@ -59,7 +58,7 @@ js.Any
   )
 
   val Example = slide(
-    "Example",
+    "Simple example",
     code.scala(
       """@js.native
 @JSImport("jquery", JSImport.Namespace)
