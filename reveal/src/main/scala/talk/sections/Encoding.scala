@@ -110,7 +110,8 @@ object fooMod extends js.Object { // or `package fooMod`
   val bar: scala.String = js.native
   def apply(foo: scala.Double): scala.Double = js.native
 }
-""", direction = "row"
+""",
+      direction = "row"
     ),
   )
 
@@ -183,7 +184,8 @@ trait EventTarget extends js.Object {
   def addEventListener(`type`: java.lang.String, listener: EventListenerOrEventListenerObject, options: scala.Boolean): scala.Unit = js.native
   def addEventListener(`type`: java.lang.String, listener: scala.Null, options: AddEventListenerOptions): scala.Unit = js.native
   def addEventListener(`type`: java.lang.String, listener: scala.Null, options: scala.Boolean): scala.Unit = js.native
-}""", direction = "column"
+}""",
+      direction = "column"
     )
   )
 
@@ -200,7 +202,8 @@ interface HTMLElementTagNameMap {
   "abbr": HTMLElement;
 }
 
-""", """
+""",
+      """
 @js.native
 trait Document extends js.Object {
   @JSName("createElement")
@@ -208,7 +211,8 @@ trait Document extends js.Object {
   @JSName("createElement")
   def createElement_abbr(`type`: stdLib.stdLibStrings.abbr): HTMLElement = js.native
 }
-""",direction = "column"
+""",
+      direction = "column"
     )
   )
 
