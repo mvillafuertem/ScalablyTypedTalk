@@ -52,7 +52,7 @@ object Encoding {
       item("Parser for ~all of Typescript"),
       item("Keeps ~all comments"),
       item("Full handling of dependencies between libraries, including those outside of `DefinitelyTyped`"),
-      item("Full implementation of the module system, which all useful javascript libraries rely on"),
+      item("Full implementation of the module system, which all useful Javascript libraries rely on"),
       item("~All types and values are fully resolved, across library boundaries"),
       item("A naming scheme to avoid name collisions"),
       item(
@@ -94,7 +94,7 @@ package fooLib
 
 @JSGlobal("foo")
 @js.native
-object fooNs extends js.Object { // or package fooNs
+object fooNs extends js.Object { // or `package fooNs`
   val bar: scala.String = js.native
 }
 
@@ -106,7 +106,7 @@ object ^ extends js.Object {
 
 @JSImport("foo", JSImport.Namespace)
 @js.native
-object fooMod extends js.Object {
+object fooMod extends js.Object { // or `package fooMod`
   val bar: scala.String = js.native
   def apply(foo: scala.Double): scala.Double = js.native
 }
@@ -116,11 +116,25 @@ object fooMod extends js.Object {
 
   val LiteralTypes = slide(
     "literal types",
-    codeSplit(
+    codeSplit3(
       """
 export class Readable {
     on(event: "close", listener: () => void): this;
+    on(event: "data", listener: (chunk: any) => void): this;
 }""",
+      """
+object nodeLibStrings {
+  @js.native
+  sealed trait close extends js.Object
+  @js.native
+  sealed trait data extends js.Object
+
+  @scala.inline
+  def close: close = "close".asInstanceOf[close]
+  @scala.inline
+  def data: data = "data".asInstanceOf[data]
+}
+      """,
       """
 @JSImport("stream", "Readable")
 @js.native
@@ -128,17 +142,73 @@ class Readable () {
   @JSName("on")
   def on_close(
     event: nodeLib.nodeLibStrings.close,
-    listener: js.Function0[scala.Unit]
-  ): this.type = js.native
+    listener: js.Function0[scala.Unit]): this.type = js.native
+
+  @JSName("addListener")
+  def addListener_data(
+    event: nodeLib.nodeLibStrings.data,
+    listener: js.Function1[/* chunk */ js.Any, scala.Unit] ): this.type = js.native
+}
+"""
+    )
+  )
+
+  val Methods = slide(
+    "Methods",
+    list(
+      item("Huge challenge for conversion"),
+      item("Typescript is basically a big DSL for perfectly describing Javascript interfaces"),
+      item("Scala.js is bound by JVM constraints, like erasure"),
+      item.fadeIn("We solve it by what I call divide and conquer")
+    )
+  )
+
+  val MethodsDivideAndConquer = slide(
+    "Divide and conquer",
+    codeSplit(
+      """
+interface EventTarget {
+    addEventListener(
+      type: string,
+      listener: EventListenerOrEventListenerObject | null,
+      options?: boolean | AddEventListenerOptions
+    ): void;
+}""",
+      """
+@js.native
+trait EventTarget extends js.Object {
+  def addEventListener(`type`: java.lang.String): scala.Unit = js.native
+  def addEventListener(`type`: java.lang.String, listener: EventListenerOrEventListenerObject): scala.Unit = js.native
+  def addEventListener(`type`: java.lang.String, listener: EventListenerOrEventListenerObject, options: AddEventListenerOptions): scala.Unit = js.native
+  def addEventListener(`type`: java.lang.String, listener: EventListenerOrEventListenerObject, options: scala.Boolean): scala.Unit = js.native
+  def addEventListener(`type`: java.lang.String, listener: scala.Null, options: AddEventListenerOptions): scala.Unit = js.native
+  def addEventListener(`type`: java.lang.String, listener: scala.Null, options: scala.Boolean): scala.Unit = js.native
+}""", direction = "column"
+    )
+  )
+
+  val Methods2 = slide(
+    "Methods (Type parameter expansion)",
+    codeSplit(
+      """
+interface Document {
+  createElement<K extends keyof HTMLElementTagNameMap>(type: K): HTMLElementTagNameMap[K];
 }
 
-object nodeLibStrings {
-  @js.native
-  sealed trait close extends js.Object
+interface HTMLElementTagNameMap {
+  "a": HTMLAnchorElement;
+  "abbr": HTMLElement;
+}
 
-  @scala.inline
-  def close: close = "close".asInstanceOf[close]
-}"""
+""", """
+@js.native
+trait Document extends js.Object {
+  @JSName("createElement")
+  def createElement_a(`type`: stdLib.stdLibStrings.a): HTMLAnchorElement = js.native
+  @JSName("createElement")
+  def createElement_abbr(`type`: stdLib.stdLibStrings.abbr): HTMLElement = js.native
+}
+""",direction = "column"
     )
   )
 
@@ -152,7 +222,7 @@ interface Foo<U> {
 
 type Union<T> = "yes" | "no" | Foo<T> """,
       """
-/* Rewritten from type alias, can be one of: 
+/* Rewritten from type alias, can be one of:
   - unionDashToDashInheritanceLibStrings.yes
   - unionDashToDashInheritanceLibStrings.no
   - Foo[T]
@@ -197,66 +267,34 @@ trait Anon_Num extends js.Object {
     )
   )
 
-  val Methods = slide(
-    "Methods",
-    list(
-      item("Huge challenge for conversion"),
-      item("Typescript is basically a big DSL for perfectly describing javascript interfaces"),
-      item("Scala.js bound by JVM constraints, like erasure"),
-      item.fadeIn("We solve it by divide and conquer")
-    )
-  )
-
-  val MethodsDivideAndConquer = slide(
-    "Divide and conquer",
-    codeSplit(
+  val CompanionObjects = slide(
+    "Companion objets",
+    code.scala(
       """
-interface Foo {
-    method(value?: number | string): boolean;
-    method<T>(value: T): T;
-}
-""",
-      """
-@js.native
-trait Foo extends js.Object {
-  def method(): scala.Boolean = js.native
-  def method(value: java.lang.String): scala.Boolean = js.native
-  def method(value: scala.Double): scala.Boolean = js.native
-  def method[T](value: T): T = js.native
+trait EventInit extends js.Object {
+  var bubbles: js.UndefOr[scala.Boolean] = js.undefined
+  var cancelable: js.UndefOr[scala.Boolean] = js.undefined
+  var composed: js.UndefOr[scala.Boolean] = js.undefined
 }
 """
-    )
-  )
-
-  val Methods2 = slide(
-    "Methods (2)",
-    codeSplit(
+    ),
+    code.scala(
       """
-interface HTMLCanvasElement extends HTMLElement {
-    getContext(contextId: "2d", contextAttributes?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;
-    getContext(contextId: "webgl" | "experimental-webgl", contextAttributes?: WebGLContextAttributes): WebGLRenderingContext | null;
-    getContext(contextId: string, contextAttributes?: {}): CanvasRenderingContext2D | WebGLRenderingContext | null;
-}""",
-      """
-@js.native
-trait HTMLCanvasElement extends HTMLElement {
-  def getContext(contextId: java.lang.String): CanvasRenderingContext2D | WebGLRenderingContext | scala.Null = js.native
-  def getContext(contextId: java.lang.String, contextAttributes: js.Object): CanvasRenderingContext2D | WebGLRenderingContext | scala.Null = js.native
-  @JSName("getContext")
-  def getContext_2d(contextId: stdLib.stdLibStrings.`2d`): CanvasRenderingContext2D | scala.Null = js.native
-  @JSName("getContext")
-  def getContext_2d(contextId: stdLib.stdLibStrings.`2d`, contextAttributes: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | scala.Null = js.native
-  @JSName("getContext")
-  def `getContext_experimental-webgl`(contextId: stdLib.stdLibStrings.`experimental-webgl`): WebGLRenderingContext | scala.Null = js.native
-  @JSName("getContext")
-  def `getContext_experimental-webgl`(contextId: stdLib.stdLibStrings.`experimental-webgl`, contextAttributes: WebGLContextAttributes): WebGLRenderingContext | scala.Null = js.native
-  @JSName("getContext")
-  def getContext_webgl(contextId: stdLib.stdLibStrings.webgl): WebGLRenderingContext | scala.Null = js.native
-  @JSName("getContext")
-  def getContext_webgl(contextId: stdLib.stdLibStrings.webgl, contextAttributes: WebGLContextAttributes): WebGLRenderingContext | scala.Null = js.native
-}
-""", direction = "column"
-    )
+object EventInit {
+  @scala.inline
+  def apply(
+    bubbles: js.UndefOr[scala.Boolean] = js.undefined,
+    cancelable: js.UndefOr[scala.Boolean] = js.undefined,
+    composed: js.UndefOr[scala.Boolean] = js.undefined
+  ): EventInit = {
+    val __obj = js.Dynamic.literal()
+    if (!js.isUndefined(bubbles)) __obj.updateDynamic("bubbles")(bubbles)
+    if (!js.isUndefined(cancelable)) __obj.updateDynamic("cancelable")(cancelable)
+    if (!js.isUndefined(composed)) __obj.updateDynamic("composed")(composed)
+    __obj.asInstanceOf[EventInit]
+  }
+} """
+    ),
   )
 
   val Chapter =
@@ -264,10 +302,11 @@ trait HTMLCanvasElement extends HTMLElement {
       Encoding,
       Anatomy,
       LiteralTypes,
-      UnionTypes,
-      AnonymousTypes,
       Methods,
       MethodsDivideAndConquer,
-      Methods2
+      Methods2,
+      UnionTypes,
+      AnonymousTypes,
+      CompanionObjects,
     )
 }

@@ -8,19 +8,20 @@ object Motivation {
   val Scalajs = slide(
     "Scala.js",
     list(
-      item("Awesome, principled language and ecosystem, strong types, etc"),
-      item("I believe Scala + Scala.js is a strong competitive advantage today"),
-      item("However, this talk isn't about the virtues of Scala.js"),
+      item.fadeIn("Awesome language and ecosystem, strong types, principled, etc"),
+      item.fadeIn("I believe Scala + Scala.js is a strong competitive advantage today"),
+      item.fadeIn("However, this talk isn't about the virtues of Scala.js"),
     ),
   )
 
   val ScalajsBut = slide(
-    "Scala.js - The flip side",
+    "Scala.js - challenges",
+    <.p("(my perspective)"),
     list(
       // History repeats itself?
-      item.fadeIn("Lacks enough contributors"),
-      item.fadeIn("Lacks breadth in libraries"),
-      item.fadeIn("Github is a graveyard of abandoned javascript wrapper libraries"),
+      item.fadeIn("Lacks contributors"),
+      item.fadeIn("Lacks variety in libraries"),
+      item.fadeIn("Github feels like graveyard of seemingly abandoned javascript wrappers"),
       item.fadeIn("A history lesson..."),
     ),
   )
@@ -45,7 +46,6 @@ object Motivation {
       item.fadeIn("- How can i make jquery pleasant to use?"),
       item.fadeIn("- What do you mean \"write facades\"?"),
       item.fadeIn("(ugh)"),
-      item.fadeIn("- Hey people! Look at my jquery4s project!"),
       item.fadeIn("- Ooh, look at this other fancy language!"),
     ),
   )
@@ -62,7 +62,7 @@ object Motivation {
   val JavascriptHasSolutions = slide(
     "Javascript for the win",
     list(
-      item(
+      item.fadeIn(
         withExamplesP(
           "Opens up platforms!",
           "aws-lambda",
@@ -74,7 +74,7 @@ object Motivation {
           "react-native"
         )
       ),
-      item(
+      item.fadeIn(
         withExamplesP(
           "UI component libraries",
           "antd",
@@ -83,8 +83,8 @@ object Motivation {
           "semantic-ui"
         )
       ),
-      item("Graphical React components and libraries (thousands)"),
-      item(
+      item.fadeIn(withExamplesP("Graphical React components and libraries", "...")),
+      item.fadeIn(
         withExamplesP(
           "Charting",
           "chart.js",
@@ -94,7 +94,7 @@ object Motivation {
           "nvd3"
         )
       ),
-      item(
+      item.fadeIn(
         withExamplesP(
           "Integrations",
           "aws",
@@ -107,15 +107,15 @@ object Motivation {
           "twilio"
         )
       ),
-      item("Niche things like browser plugins, excel plugins, WiiU controller libraries"),
+      item.fadeIn(withExamples("Niche things like", "browser plugins", "excel plugins", "almost anything")),
     )
   )
 
   val WeActuallyWantThis = slide(
     "Hmm",
     list(
-      item("Scala doesn't currently serve any of these niches well."),
-      item("But we need these things!"),
+      item("Scala doesn't currently serve most of these niches well."),
+      item("And we need these things!"),
       <.br,
       item.fadeIn("How?"),
       item.fadeIn("Let's talk about Typescript!"),
@@ -125,14 +125,14 @@ object Motivation {
   val TypescriptOnASlide = slide(
     "Typescript",
     list(
-      item("Gradual, static typing for Javascript"),
+      item("Gradual, structural, static typing for Javascript"),
       item("Taking over the world, fast!"),
-      item("Surprisingly rich type system to describe all the eccentricities of Javascript APIs"),
-//      item("loose relationship between types and values, but has a very reasonable language subset"),
-//      item("very specialized DSL for javascript"),
-      item(<.span("the language ", <.em("is"), " the integration to javascript")),
-      item("A lot of cool type-level stuff! including quite a bit which could transfer back to Scala."),
-      item("We'll see a bit in a while"),
+      item("Surprisingly rich type system to describe all the peculiarities of Javascript APIs"),
+//      item("Loose relationship between types and values, but has a very reasonable language subset"),
+//      item("Very specialized DSL for javascript"),
+      item(<.span("The language ", <.em("is"), " javascript, just with types")),
+//      item("A lot of cool type-level stuff! including quite a bit which could transfer back to Scala."),
+//      item("We'll see a bit in a while"),
       <.br,
       item.fadeIn("And the coolest part?")
     )
@@ -147,14 +147,6 @@ object Motivation {
     )
   )
 
-  val Goal = slide(
-    "Goal",
-    list(
-      item("Relieve ourselves of the burden of maintaining typings"),
-      item("Make ~all of Javascript available to us"),
-    )
-  )
-
   val Chapter = chapter(
     chapterSlide("Motivation"),
     Scalajs,
@@ -166,6 +158,5 @@ object Motivation {
     WeActuallyWantThis,
     TypescriptOnASlide,
     DTOnASlide,
-    Goal
   )
 }

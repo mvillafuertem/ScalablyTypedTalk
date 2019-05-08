@@ -23,7 +23,7 @@ object PresentationUtil {
     )
 
   object slide {
-    def apply(headerStr: String, content: TagOf[HTMLElement]*) =
+    def apply(headerStr: String, content: TagMod*) =
       <.section(
         <.div(
           ^.cls := "slide-header",
@@ -32,7 +32,7 @@ object PresentationUtil {
         TagMod.fromTraversableOnce(content)
       )
 
-    def noHeader(content: TagOf[HTMLElement]*) =
+    def noHeader(content: TagMod*) =
       <.section(content: _*)
   }
 
@@ -41,6 +41,14 @@ object PresentationUtil {
       ^.style := js.Dynamic.literal(display = "flex", flexDirection = direction),
       code.ts(ts),
       code.scala(scala)
+    )
+
+  def codeSplit3(ts: String, scala1: String, scala2: String) =
+    <.div(
+      ^.style := js.Dynamic.literal(display = "flex", flexDirection = "column"),
+      code.ts(ts),
+      code.scala(scala1),
+      code.scala(scala2),
     )
 
   object code {
@@ -82,7 +90,7 @@ object PresentationUtil {
 
   def list(head: TagMod, tail: TagMod*) = <.ul(head +: tail: _*)
 
-  def link(uri: String) = <.a(^.href := "https://" + uri, uri)
+  def link(uri: String) = <.a(^.href := "https://" + uri, uri, ^.target := "_blank", ^.rel := "noopener noreferrer")
 
   object item {
     def apply(content:  TagMod) = <.li(content)

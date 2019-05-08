@@ -9,20 +9,34 @@ object About {
   val Initial = chapterSlide("Enter ScalablyTyped")
 
   val ScalablyTyped = slide(
-    "What?",
+    "",
     list(
       item("Typescript type definitions automatically translated to Scala.js"),
+      item("Stop spending time maintaining typings"),
+      item("Make ~all of the Javascript ecosystem usable"),
+    )
+  )
+  val HaventPeopleTriedThis = slide(
+    "Loads of prior art",
+    list(
+      item("DefinitelyScala"),
+      item("scala-js-ts-importer"),
+      item("Retyped for C#"),
+      item("ts2k for Kotlin"),
+      item("ReasonablyTyped for Reason ML"),
+      item("typescript2java"),
     )
   )
 
   val Numbers = slide(
     "Numbers",
     list(
-      item("Almost 7000 typings on GitHub and published to Bintray"),
-      item("Almost 7000000 lines of Scala source code"),
+      item("~7000 typings on GitHub and published to Bintray"),
+      item("~7000000 lines of Scala source code"),
+      item("~2600000 lines of documentation"),
       item("Covers ~all important parts of the Javascript ecosystem"),
       <.br,
-      item("(Anything missing? Request it on Gitter)"),
+      item("(Notice anything missing? Request it on Gitter)"),
     )
   )
 
@@ -62,5 +76,5 @@ object About {
     )
   )
 
-  val Chapter = chapter(Initial, ScalablyTyped, Numbers, Facades, Demos)
+  val Chapter = chapter(Initial, ScalablyTyped, Numbers, HaventPeopleTriedThis, Facades, Demos)
 }
