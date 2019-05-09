@@ -20,9 +20,9 @@ object Motivation {
     list(
       // History repeats itself?
       item.fadeIn("Lacks contributors"),
-      item.fadeIn("Lacks variety in libraries"),
-      item.fadeIn("Github feels like graveyard of seemingly abandoned javascript wrappers"),
-      item.fadeIn("A history lesson..."),
+      item.fadeIn("Lacks full coverage in libraries"),
+      item.fadeIn("Many projects are seemingly abandoned, especially javascript wrappers"),
+      item.fadeIn("Let's look back in time..."),
     ),
   )
 
@@ -65,10 +65,11 @@ object Motivation {
       item.fadeIn(
         withExamplesP(
           "Opens up platforms!",
-          "aws-lambda",
+//          "aws-lambda",
           "cordova",
           "electron",
-          "jupyter",
+          "ionic",
+//          "jupyter",
           "node",
           "raspi",
           "react-native"
@@ -140,7 +141,7 @@ object Motivation {
   val DTOnASlide = slide(
     "DefinitelyTyped",
     list(
-      item("All relevant parts of Javascript ecosystem retrofitted with types"),
+      item("Huge parts of Javascript ecosystem retrofitted with types"),
       item("Incredible community effort"),
       item("Millions of programmer hours invested"),
       item("Typescript as an IDL for ~all of Javascript"),

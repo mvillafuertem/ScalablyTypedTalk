@@ -42,16 +42,16 @@ js.Any
     item(<.span(codeFragment.scala(ann), desc))
 
   val Annotations = slide(
-    "Descriptions driven by annotations",
+    "Annotation driven development in Scala",
     list(
-      <.h5("""Describing what is wrapped"""),
+//      <.h5("""Specify what is described"""),
       described("@JSImport", " used for describing a Javascript module"),
       described("@JSGlobal", " used for describing Javascript values in the global scope"),
       <.br,
-      <.h5("""Tweaking descriptions"""),
+//      <.h5("""Tweak descriptions"""),
       described("@JSName", " used when a Scala name differs from the Javascript name"),
       <.br,
-      <.h5("""Types of descriptions"""),
+//      <.h5("""Types of structures"""),
       described("@ScalaJSDefined", " a simple Javascript structure which we can implement from Scala"),
       described("@js.native", " a complex Javascript structure"),
     )

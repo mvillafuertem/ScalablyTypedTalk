@@ -1,6 +1,7 @@
 package talk.sections
 
 import japgolly.scalajs.react.vdom.html_<^._
+import talk.FontAwesome
 import talk.PresentationUtil._
 
 //noinspection TypeAnnotation
@@ -9,12 +10,19 @@ object About {
   val Initial = chapterSlide("Enter ScalablyTyped")
 
   val ScalablyTyped = slide(
-    "",
+    "Goals",
     list(
       item("Typescript type definitions automatically translated to Scala.js"),
       item("Stop spending time maintaining typings"),
-      item("Make ~all of the Javascript ecosystem usable"),
+      item("Make most of the Javascript ecosystem usable"),
     )
+  )
+
+  val Unstable = slide(
+    "Warning",
+    <.p(FontAwesome.Bomb),
+    <.p("Currently published artifacts are snapshots"),
+    <.p("What we have is a beginning, not an end"),
   )
   val HaventPeopleTriedThis = slide(
     "Loads of prior art",
@@ -76,5 +84,5 @@ object About {
     )
   )
 
-  val Chapter = chapter(Initial, ScalablyTyped, Numbers, HaventPeopleTriedThis, Facades, Demos)
+  val Chapter = chapter(Initial, ScalablyTyped, Numbers, Unstable, HaventPeopleTriedThis, Facades, Demos)
 }
