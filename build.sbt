@@ -17,44 +17,37 @@ lazy val dist = TaskKey[File]("dist")
 
 lazy val reveal = project
   .configure(baseSettings, bundlerSettings, browserProject, withCssLoading)
+  .enablePlugins(ScalablyTypedConverterPlugin)
   .settings(
-    webpackDevServerPort := 8010,
-    libraryDependencies ++= Seq(
-      "com.github.japgolly.scalajs-react" %%% "core" % "1.3.1",
-      ScalablyTyped.F.`fortawesome__fontawesome-common-types`,
-      ScalablyTyped.F.`fortawesome__fontawesome-svg-core`,
-      ScalablyTyped.F.`fortawesome__free-solid-svg-icons`,
-      ScalablyTyped.F.`fortawesome__react-fontawesome`,
-      ScalablyTyped.H.highlight_dot_js,
-      ScalablyTyped.R.`react-japgolly-facade`,
-      ScalablyTyped.R.`reveal`,
-    ),
+    webpackDevServerPort := 8020,
     Compile / npmDependencies ++= Seq(
       "highlight.js" -> "9.12",
+      "@types/highlight.js" -> "9.12.4",
       "reveal.js" -> "3.7.0",
-      "react-dom" -> "16.8",
-      "react" -> "16.8",
+      "@types/reveal" -> "3.3.33",
+      "react" -> "17.0.1",
+      "react-dom" -> "17.0.1",
+      "@types/react" -> "16.9.53",
+      "@types/react-dom" -> "16.9.8",
       "@fortawesome/fontawesome-common-types" -> "0.2.17",
       "@fortawesome/fontawesome-svg-core" -> "1.2.17",
       "@fortawesome/free-solid-svg-icons" -> "5.8.1",
       "@fortawesome/react-fontawesome" -> "0.1.4",
+      "@types/node" -> "14.14.3"
     ),
+    stFlavour := Flavour.Japgolly,
+    stIgnore ++= List("reveal.js")
   )
 
 lazy val baseSettings: Project => Project =
   _.enablePlugins(ScalaJSPlugin)
     .settings(
-      scalaVersion := "2.12.8",
+      scalaVersion := "2.13.3",
       version := "0.1-SNAPSHOT",
       scalacOptions ++= ScalacOptions.flags,
       scalaJSUseMainModuleInitializer := true,
-      scalaJSModuleKind := ModuleKind.CommonJSModule,
       /* disabled because it somehow triggers many warnings */
-      emitSourceMaps := false,
-      /* in preparation for scala.js 1.0 */
-      scalacOptions += "-P:scalajs:sjsDefinedByDefault",
-      /* for ScalablyTyped */
-      resolvers += Resolver.bintrayRepo("oyvindberg", "ScalablyTyped"),
+      scalaJSLinkerConfig := scalaJSLinkerConfig.value.withSourceMap(false).withModuleKind(ModuleKind.CommonJSModule),
     )
 
 lazy val bundlerSettings: Project => Project =
@@ -63,8 +56,6 @@ lazy val bundlerSettings: Project => Project =
       /* Specify current versions and modes */
       startWebpackDevServer / version := "3.1.10",
       webpack / version := "4.26.1",
-      Compile / fastOptJS / webpackExtraArgs += "--mode=development",
-      Compile / fullOptJS / webpackExtraArgs += "--mode=production",
       Compile / fastOptJS / webpackDevServerExtraArgs += "--mode=development",
       Compile / fullOptJS / webpackDevServerExtraArgs += "--mode=production",
       useYarn := true,

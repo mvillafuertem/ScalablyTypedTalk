@@ -1,8 +1,8 @@
 package talk
 
+import japgolly.scalajs.react.internal.intercalateInto
+import japgolly.scalajs.react.vdom.TagMod
 import japgolly.scalajs.react.vdom.html_<^._
-import japgolly.scalajs.react.vdom.{TagMod, TagOf}
-import org.scalajs.dom.raw.HTMLElement
 
 import scala.scalajs.js
 
@@ -80,11 +80,18 @@ object PresentationUtil {
     val ts    = codeFragment("Typescript") _
   }
 
+  def intercalate(as: Seq[TagMod], sep: TagMod): TagMod = {
+    val b = List.newBuilder[TagMod]
+    intercalateInto[TagMod](b, as.iterator, sep)
+    val res = b.result()
+    TagMod.fromTraversableOnce(res)
+  }
+
   def withExamples(str: String, xs: String*): TagMod =
-    <.span(str, " ", TagMod.intercalate(xs.map(x => <.span(^.cls := "mono", x)), ", "))
+    <.span(str, " ", intercalate(xs.map(x => <.span(^.cls := "mono", x)), ","))
 
   def withExamplesP(str: String, xs: String*): TagMod =
-    <.span(str, " ( ", TagMod.intercalate(xs.map(x => <.span(^.cls := "mono", x)), ", "), " )")
+    <.span(str, " ( ", intercalate(xs.map(x => <.span(^.cls := "mono", x)), ", "), " )")
 
   def note(s: String) = <.aside(^.className := "notes", s)
 

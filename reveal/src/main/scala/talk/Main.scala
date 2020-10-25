@@ -1,8 +1,8 @@
 package talk
 
 import org.scalajs.dom
-import typings.highlightDotJsLib.highlightDotJsMod
-import typings.revealLib.{RevealOptions, RevealStatic}
+import typings.highlightJs.{mod => highlight}
+import typings.reveal.{RevealOptions, RevealStatic}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
@@ -23,7 +23,7 @@ object Main {
           sections.About.Chapter,
           sections.ScalaJsInterop.Chapter,
           sections.Encoding.Chapter,
-          sections.Outro.Chapter,
+          sections.Outro.Chapter
         )
       )
     )
@@ -38,30 +38,29 @@ object Main {
     Includes.ZoomJs
 
     /* initialize highlight.js */
-    highlightDotJsMod.^.initHighlightingOnLoad()
+    highlight.initHighlightingOnLoad()
 
     /* render talk before we initialize Reveal */
     Talk().renderIntoDOM(dom.document.body)
 
     Includes.Reveal.initialize(
-      RevealOptions(
-        width      = "80%",
-        height     = "90%",
-        controls   = false,
-        progress   = false,
-        history    = true,
-        center     = true,
-        transition = "none",
+      RevealOptions()
+        .setWidth("80%")
+        .setHeight("90%")
+        .setControls(false)
+        .setProgress(false)
+        .setHistory(true)
+        .setCenter(true)
+        .setTransition("none")
         // Parallax background image
-        parallaxBackgroundImage = Includes.Background,
+        .setParallaxBackgroundImage(Includes.Background)
         // CSS syntax, e.g.  - currently only pixels are supported (don't use % or auto)
-        parallaxBackgroundSize = "4608px 3072px",
-        // Number of pixels to move the parallax background per slide
-        // - Calculated automatically unless specified
-        // - Set to 0 to disable movement along an axis
+        .setParallaxBackgroundSize("4608px 3072px")
+      // Number of pixels to move the parallax background per slide
+      // - Calculated automatically unless specified
+      // - Set to 0 to disable movement along an axis
 //        parallaxBackgroundHorizontal = 200,
 //        parallaxBackgroundVertical   = 100,
-      )
     )
   }
 

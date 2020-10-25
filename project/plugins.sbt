@@ -1,5 +1,5 @@
-addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.27")
-addSbtPlugin("ch.epfl.scala" % "sbt-scalajs-bundler" % "0.14.0")
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.3.0")
+addSbtPlugin("ch.epfl.scala" % "sbt-scalajs-bundler" % "0.20.0")
 
-resolvers += Resolver.bintrayRepo("oyvindberg", "ScalablyTyped")
-addSbtPlugin("org.scalablytyped" % "sbt-scalablytyped" % "201905060409")
+resolvers += Resolver.bintrayRepo("oyvindberg", "converter")
+addSbtPlugin("org.scalablytyped.converter" % "sbt-converter" % "1.0.0-beta27")
