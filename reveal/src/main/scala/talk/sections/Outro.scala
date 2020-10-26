@@ -12,8 +12,7 @@ object Outro {
     "Thanks!",
     <.br,
     list(
-      item(link("github.com/oyvindberg/ScalablyTyped")),
-      item(link("github.com/oyvindberg/ScalablyTypedDemos")),
+      item(link("scalablytyped.org")),
       item(link("gitter.im/ScalablyTyped/Community")),
     )
   )

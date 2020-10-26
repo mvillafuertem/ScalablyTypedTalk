@@ -10,43 +10,7 @@ object Motivation {
     list(
       item.fadeIn("Awesome language and ecosystem, strong types, principled, etc"),
       item.fadeIn("I believe Scala + Scala.js is a strong competitive advantage today"),
-      item.fadeIn("However, this talk isn't about the virtues of Scala.js"),
-    ),
-  )
-
-  val ScalajsBut = slide(
-    "Scala.js - challenges",
-    <.p("(my perspective)"),
-    list(
-      // History repeats itself?
-      item.fadeIn("Lacks contributors"),
-      item.fadeIn("Lacks full coverage in libraries"),
-      item.fadeIn("Many projects are seemingly abandoned, especially javascript wrappers"),
-      item.fadeIn("Let's look back in time..."),
-    ),
-  )
-
-  val Scala2012 = slide(
-    "Scala 2012 - An adopters story",
-    list(
-      // History repeats itself?
-      item.fadeIn("- Ooh, look at this fancy language!"),
-      item.fadeIn("- How can i make spring pleasant to use?"),
-      item.fadeIn("- Hey people! Look at my newly released spring4s library!"),
-      item.fadeIn("- Hey people! Look at my new, fancy scala library!"),
-      item.fadeIn("- Hey people! Look at my even newer, even fancier scala library!"),
-    ),
-  )
-
-  val Scalajs2019 = slide(
-    "Scala.js 2019 - An adopters story",
-    list(
-      // History repeats itself?
-      item.fadeIn("- Ooh, look at this fancy language!"),
-      item.fadeIn("- How can i make jquery pleasant to use?"),
-      item.fadeIn("- What do you mean \"write facades\"?"),
-      item.fadeIn("(ugh)"),
-      item.fadeIn("- Ooh, look at this other fancy language!"),
+      item.fadeIn("Not really here to talk about the virtues of Scala.js"),
     ),
   )
 
@@ -54,7 +18,7 @@ object Motivation {
     "Let's talk about writing frontend apps",
     list(
       item.fadeIn("Javascript and CSS 😔"),
-      item.fadeIn("This talk is also not about their respective (lack of) virtues"),
+      item.fadeIn("Also not really here to talk about their respective (lack of) virtues"),
       item.fadeIn("The question is rather, what happens when your designer wants an image carousel?"),
     )
   )
@@ -151,9 +115,6 @@ object Motivation {
   val Chapter = chapter(
     chapterSlide("Motivation"),
     Scalajs,
-    ScalajsBut,
-    Scala2012,
-    Scalajs2019,
     LetsTalkAboutJavascript,
     JavascriptHasSolutions,
     WeActuallyWantThis,

@@ -20,9 +20,9 @@ object Main {
           ^.cls := "slides",
           sections.Intro.Chapter,
           sections.Motivation.Chapter,
-          sections.About.Chapter,
-          sections.ScalaJsInterop.Chapter,
-          sections.Encoding.Chapter,
+          sections.Content.Chapter,
+//          sections.ScalaJsInterop.Chapter,
+//          sections.Encoding.Chapter,
           sections.Outro.Chapter
         )
       )

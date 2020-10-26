@@ -29,6 +29,7 @@ object PresentationUtil {
           ^.cls := "slide-header",
           <.h3(headerStr)
         ),
+        <.br,
         TagMod.fromTraversableOnce(content)
       )
 
@@ -54,7 +55,6 @@ object PresentationUtil {
   object code {
     def apply(language: String)(codeStr: String) =
       <.pre(
-        ^.cls := "fragment",
         <.code(
           ^.cls := s"$language",
           VdomAttr("data-trim") := "",

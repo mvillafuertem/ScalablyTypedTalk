@@ -1,8 +1,7 @@
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption.REPLACE_EXISTING
 
-/**
-  * Custom task to start demo with webpack-dev-server, use as `<project>/start`.
+/** Custom task to start demo with webpack-dev-server, use as `<project>/start`.
   * Just `start` also works, and starts all frontend demos
   *
   * After that, the incantation is this to watch and compile on change:
@@ -47,7 +46,9 @@ lazy val baseSettings: Project => Project =
       scalacOptions ++= ScalacOptions.flags,
       scalaJSUseMainModuleInitializer := true,
       /* disabled because it somehow triggers many warnings */
-      scalaJSLinkerConfig := scalaJSLinkerConfig.value.withSourceMap(false).withModuleKind(ModuleKind.CommonJSModule),
+      scalaJSLinkerConfig := scalaJSLinkerConfig.value
+        .withSourceMap(false)
+        .withModuleKind(ModuleKind.CommonJSModule)
     )
 
 lazy val bundlerSettings: Project => Project =
@@ -58,7 +59,7 @@ lazy val bundlerSettings: Project => Project =
       webpack / version := "4.26.1",
       Compile / fastOptJS / webpackDevServerExtraArgs += "--mode=development",
       Compile / fullOptJS / webpackDevServerExtraArgs += "--mode=production",
-      useYarn := true,
+      useYarn := true
     )
 
 lazy val withCssLoading: Project => Project =
@@ -70,12 +71,11 @@ lazy val withCssLoading: Project => Project =
       "css-loader" -> "2.1.0",
       "style-loader" -> "0.23.1",
       "file-loader" -> "3.0.1",
-      "url-loader" -> "1.1.2",
+      "url-loader" -> "1.1.2"
     )
   )
 
-/**
-  * Implement the `start` and `dist` tasks defined above.
+/** Implement the `start` and `dist` tasks defined above.
   * Most of this is really just to copy the index.html file around.
   */
 lazy val browserProject: Project => Project =
